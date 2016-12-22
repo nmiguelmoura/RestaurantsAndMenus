@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Edit menu menu name</h2>
+    <form>
+        <p>Name</p>
+        <input type="text" name="menu_name" placeholder="old name goes here">
+        <br>
+        <p>Course</p>
+        <select name="menu_course">
+            <option value="soap">Soap</option>
+            <option value="salad">Salad</option>
+            <option value="meat">Meat</option>
+            <option value="fish">Fish</option>
+            <option value="desert">Desert</option>
+        </select>
+        <br>
+        <p>Description</p>
+        <textarea name="menu_description" placeholder="Description goes here"></textarea>
+        <br>
+        <p>Price</p>
+        <input type="number" name="menu_price" placeholder="0.03"> €
+        <input type="submit" value="Save changes">
+    </form>
+    <a href="/"><p>Cancel</p></a>
+{% endblock %}
