@@ -1,16 +1,21 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
+import restaurantspage
+import newrestaurantpage
 
 app = Flask(__name__)
 
+restaurants = restaurantspage.Restaurants_Page()
+new_restaurant = newrestaurantpage.New_Restaurant_Page()
 
 @app.route('/')
 @app.route('/restaurants')
 def show_restaurants():
-    return render_template('restaurants.html')
+    return restaurants.launch(render_template)
 
-@app.route('/restaurants/new')
+
+@app.route('/restaurants/new', methods=['GET', 'POST'])
 def add_restaurant():
-    return render_template('newrestaurant.html')
+    return new_restaurant.launch(render_template, request, redirect, url_for)
 
 @app.route('/restaurants/<int:rest_id>/edit')
 def edit_restaurant(rest_id):
