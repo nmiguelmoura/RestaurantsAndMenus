@@ -2,7 +2,7 @@
 
 {% block content %}
     <h2>Add a new restaurant</h2>
-    <form>
+    <form method="post" action="{{ url_for('add_restaurant') }}">
         <p>Name</p>
         <input type="text" name="rest_name">
         <input type="submit" value="Submit">
