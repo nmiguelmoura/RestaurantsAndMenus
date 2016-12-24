@@ -3,16 +3,18 @@
 {% block content %}
     <h2>List of restaurants</h2>
     <div>
+{% if num_restaurants > 0 %}
+    {% for r in restaurants %}
         <div>
-            <a href="#"><p>Restaurant 1</p></a>
-            <a href="#"><p>Edit</p></a>
-            <a href="#"><p>Delete</p></a>
+            <a href="{{ url_for('show_menus', rest_id=r.id) }}"><p>{{ r.name }}</p></a>
+            <a href="{{ url_for('edit_restaurant', rest_id=r.id) }}"><p>Edit</p></a>
+            <a href="{{ url_for('delete_restaurant', rest_id=r.id) }}"><p>Delete</p></a>
         </div>
-        <div>
-            <a href="#"><p>Restaurant 2</p></a>
-            <a href="#"><p>Edit</p></a>
-            <a href="#"><p>Delete</p></a>
-        </div>
+    {% endfor %}
+{% else %}
+    <p>No restaurants have been added yet!</p>
+{% endif %}
+
     </div>
     <div>
         <a href="/restaurants/new"><p>Add new restaurant</p></a>
