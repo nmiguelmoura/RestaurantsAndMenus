@@ -1,3 +1,5 @@
+from flask import render_template
+
 import db_interaction
 
 class Restaurants_Page:
@@ -7,6 +9,6 @@ class Restaurants_Page:
     def __init__(self):
         pass
 
-    def launch(self, render_template):
+    def launch(self):
         restaurants, num = self.db_rest.query_restaurants()
         return render_template('restaurants.html', num_restaurants=num, restaurants=restaurants)

@@ -1,29 +1,33 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template
 import restaurantspage
 import newrestaurantpage
+import editrestaurantpage
+import deleterestaurantpage
 
 app = Flask(__name__)
 
-restaurants = restaurantspage.Restaurants_Page()
-new_restaurant = newrestaurantpage.New_Restaurant_Page()
+restaurants_page = restaurantspage.Restaurants_Page()
+new_restaurant_page = newrestaurantpage.New_Restaurant_Page()
+edit_restaurant_page = editrestaurantpage.Edit_Restaurant_Page()
+delete_restaurant_page = deleterestaurantpage.Delete_Restaurant_Page()
 
 @app.route('/')
 @app.route('/restaurants')
 def show_restaurants():
-    return restaurants.launch(render_template)
+    return restaurants_page.launch()
 
 
 @app.route('/restaurants/new', methods=['GET', 'POST'])
 def add_restaurant():
-    return new_restaurant.launch(render_template, request, redirect, url_for)
+    return new_restaurant_page.launch()
 
-@app.route('/restaurants/<int:rest_id>/edit')
+@app.route('/restaurants/<int:rest_id>/edit', methods=['GET', 'POST'])
 def edit_restaurant(rest_id):
-    return render_template('editrestaurant.html')
+    return edit_restaurant_page.launch(rest_id)
 
-@app.route('/restaurants/<int:rest_id>/delete')
+@app.route('/restaurants/<int:rest_id>/delete', methods=['GET', 'POST'])
 def delete_restaurant(rest_id):
-    return render_template('deleterestaurant.html')
+    return delete_restaurant_page.launch(rest_id)
 
 @app.route('/restaurants/<int:rest_id>/menu')
 def show_menus(rest_id):
@@ -41,7 +45,12 @@ def edit_menu(rest_id, menu_id):
 def delete_menu(rest_id, menu_id):
     return render_template('deletemenu.html')
 
+@app.route('/pagenotfound')
+def page_not_found():
+    return render_template('pagenotfound.html')
+
 
 if __name__ == '__main__':
+    app.secret_key = "secret_key"
     app.debug = True
     app.run(host='0.0.0.0', port=5000)

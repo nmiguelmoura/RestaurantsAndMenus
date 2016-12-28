@@ -5,6 +5,13 @@
     <form method="post" action="{{ url_for('add_restaurant') }}">
         <p>Name</p>
         <input type="text" name="rest_name">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for m in messages %}
+                    <p>{{ m }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         <input type="submit" value="Submit">
     </form>
     <a href="/"><p>Cancel</p></a>
