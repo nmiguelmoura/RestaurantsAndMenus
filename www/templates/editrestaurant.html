@@ -1,20 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>Edit restaurant {{ restaurant.name }}</h2>
-    <form method="post" action="{{ url_for('edit_restaurant', rest_id=restaurant.id) }}">
-        <p>Name</p>
-        <input type="text" name="rest_name" placeholder="{{ restaurant.name }}">
-
-        {% with messages = get_flashed_messages() %}
+    <h2 class="col-sm-12-12 content-white-background">Edit restaurant {{ restaurant.name }}</h2>
+    <form method="post" action="{{ url_for('edit_restaurant', rest_id=restaurant.id) }}" class="wrapper content-white-background">
+        <div class="col-sm-12-12 form-component">
+            <p>Name</p>
+            <input type="text" name="rest_name" placeholder="Insert restaurant name" value="{{ name }}">
+            {% with messages = get_flashed_messages() %}
             {% if messages %}
                 {% for m in messages %}
-                    <p>{{ m }}</p>
+                    <p class="error-message">{{ m }}</p>
                 {% endfor %}
             {% endif %}
         {% endwith %}
+        </div>
 
         <input type="submit" value="Save changes">
     </form>
-    <a href="/"><p>Cancel</p></a>
+    <div class="col-sm-12-12 content-white-background button-container-big">
+        <a class="button-type-1" href="/"><p>Cancel</p></a>
+    </div>
 {% endblock %}

@@ -1,0 +1,27 @@
+footer {
+    background-color: crimson;
+    width: 100%;
+}
+
+footer ul {
+    font-size: 0.875em;
+    text-align: center;
+    margin: 5px 0;
+}
+
+footer ul li {
+    height: 44px;
+    display: table;
+}
+
+footer ul a {
+    color: white;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+@media screen and (min-width: 768px) {
+    footer ul {
+        font-size: 1em;
+    }
+}

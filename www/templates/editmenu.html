@@ -1,26 +1,42 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>Edit menu menu name</h2>
-    <form>
-        <p>Name</p>
-        <input type="text" name="menu_name" placeholder="old name goes here">
+    <h2 class="col-sm-12-12 content-white-background">Edit menu {{ menu.name }}</h2>
+    <form method="post" action="{{ url_for('edit_menu', rest_id=rest_id, menu_id=menu.id) }}"
+          class="wrapper-inside content-white-background">
+        <div class="col-sm-12-12 form-component">
+            <p>Name</p>
+            <input type="text" name="menu_name" value="{{ name }}" placeholder="Insert menu name">
+            <p class="error-message">{{ name_message }}</p>
+        </div>
         <br>
-        <p>Course</p>
-        <select name="menu_course">
-            <option value="soap">Soap</option>
-            <option value="salad">Salad</option>
-            <option value="meat">Meat</option>
-            <option value="fish">Fish</option>
-            <option value="desert">Desert</option>
-        </select>
+        <div class="col-sm-12-12 form-component">
+            <p>Course</p>
+            <select name="menu_course">
+                <option value="None" selected disabled>Select course here</option>
+                <option value="Soap">Soap</option>
+                <option value="Salad">Salad</option>
+                <option value="Meat">Meat</option>
+                <option value="Fish">Fish</option>
+                <option value="Desert">Desert</option>
+            </select>
+            <p class="error-message">{{ course_message }}</p>
+        </div>
         <br>
-        <p>Description</p>
-        <textarea name="menu_description" placeholder="Description goes here"></textarea>
+        <div class="col-sm-12-12 form-component">
+            <p>Description</p>
+            <textarea name="menu_description"  placeholder="Insert menu description">{{ description }}</textarea>
+            <p class="error-message">{{ description_message }}</p>
+        </div>
         <br>
-        <p>Price</p>
-        <input type="number" name="menu_price" placeholder="0.03"> €
+        <div class="col-sm-12-12 form-component">
+            <p>Price / €</p>
+            <input type="number" step="0.01" name="menu_price" value="{{ price }}" placeholder="Insert menu price in Euros (€)">
+            <p class="error-message">{{ price_message }}</p>
+        </div>
         <input type="submit" value="Save changes">
     </form>
-    <a href="/"><p>Cancel</p></a>
+    <div class="col-sm-12-12 content-white-background button-container-big">
+        <a class="button-type-1" href="{{ url_for('show_menus', rest_id=rest_id) }}"><p>Cancel</p></a>
+    </div>
 {% endblock %}

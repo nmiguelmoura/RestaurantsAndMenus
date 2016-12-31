@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>Delete restaurant {{ restaurant.name }}</h2>
-    <form method="post" action="{{ url_for('delete_restaurant', rest_id=restaurant.id) }}">
+    <h2 class="col-sm-12-12 content-white-background">Delete restaurant {{ restaurant.name }}</h2>
+    <form method="post" action="{{ url_for('delete_restaurant', rest_id=restaurant.id) }}" class="wrapper content-white-background">
         <input type="submit" value="Delete">
     </form>
-    <a href="/"><p>Cancel</p></a>
+    <div class="col-sm-12-12 content-white-background button-container-big">
+        <a class="button-type-1" href="/"><p>Cancel</p></a>
+    </div>
 {% endblock %}

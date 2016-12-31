@@ -2,17 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Restaurant search</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/reset.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/grid.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/general.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/header.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/footer.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/page_content.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/buttons.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/components.css') }}">
 </head>
 <body>
-    <div class="global-container">
-        <header>Header</header>
-        <div class="content">
-            {% block content %}
-
-            {% endblock %}
+<div class="global-container">
+    <header>
+        <div class="wrapper header-content">
+            <h1 class="col-sm-12-12"><a href="{{ url_for('show_restaurants') }}">Restaurant search</a></h1>
         </div>
-        <footer>Footer</footer>
+    </header>
+    <div class="page-content wrapper">
+        {% block content %}
+
+        {% endblock %}
     </div>
+    <footer>
+        <ul class="wrapper">
+            <li class="col-sm-12-12"><a href="{{ url_for('show_restaurants') }}">Home</a></li>
+            <li class="col-sm-12-12"><a href="{{ url_for('add_restaurant') }}">Add a new restaurant</a></li>
+        </ul>
+    </footer>
+</div>
 </body>
 </html>

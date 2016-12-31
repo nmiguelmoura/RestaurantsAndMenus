@@ -15,6 +15,7 @@ class Delete_Restaurant_Page:
             if request.method == "GET":
                 return render_template('deleterestaurant.html', restaurant=restaurant)
             elif request.method == "POST":
+                flash(u"%s was deleted." % restaurant.name)
                 self.db_rest.delete_restaurant(rest_id)
                 return redirect('/restaurants')
         else:

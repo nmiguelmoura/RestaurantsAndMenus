@@ -1,0 +1,31 @@
+header {
+    background-color: crimson;
+    height: 44px;
+}
+
+.header-content {
+    height: 100%;
+}
+
+header h1 {
+    display: table;
+    height: 100%;
+    text-indent: 10px;
+    font-size: 1.25em;
+}
+
+header h1 a {
+    display: table-cell;
+    color: white;
+    vertical-align: middle;
+}
+
+@media screen and (min-width: 768px) {
+    header {
+        height: 58px;
+    }
+
+    header h1 {
+        font-size: 1.5em;
+    }
+}

@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>Add a new restaurant</h2>
-    <form method="post" action="{{ url_for('add_restaurant') }}">
-        <p>Name</p>
-        <input type="text" name="rest_name">
+    <h2 class="col-sm-12-12 content-white-background">Add a new restaurant</h2>
+    <form method="post" action="{{ url_for('add_restaurant') }}" class="wrapper-inside content-white-background">
+        <div class="col-sm-12-12 form-component">
+            <p>Restaurant name</p>
+            <input type="text" name="rest_name" placeholder="Insert restaurant name" value="{{ name }}">
+        </div>
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 {% for m in messages %}
@@ -14,5 +16,7 @@
         {% endwith %}
         <input type="submit" value="Submit">
     </form>
-    <a href="/"><p>Cancel</p></a>
+    <div class="col-sm-12-12 content-white-background button-container-big">
+        <a class="button-type-1" href="/"><p>Cancel</p></a>
+    </div>
 {% endblock %}
