@@ -5,12 +5,24 @@ from sqlalchemy import create_engine
 Base = declarative_base()
 
 
+class User(Base):
+
+    __tablename__ = 'user'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(250))
+    email = Column(String(250))
+    picture = Column(String(250))
+
+
 class Restaurant(Base):
 
     __tablename__ = "restaurant"
 
     name = Column(String(80), nullable=False)
     id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey("user.id"))
+    user = relationship(User)
 
     @property
     def serialize(self):
@@ -31,6 +43,8 @@ class Menu(Base):
     price = Column(String(10), nullable=False)
     restaurant_id = Column(Integer, ForeignKey("restaurant.id"))
     restaurant = relationship(Restaurant)
+    user_id = Column(Integer, ForeignKey("user.id"))
+    user = relationship(User)
 
     @property
     def serialize(self):
