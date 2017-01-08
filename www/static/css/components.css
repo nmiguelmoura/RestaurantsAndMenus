@@ -83,8 +83,6 @@ textarea {
 
 select {
     border-radius: 0;
-
-
 }
 
 input[type="submit"] {
@@ -94,6 +92,7 @@ input[type="submit"] {
     color: white;
     height: 34px;
     font-size: 1em;
+    cursor: pointer;
 }
 
 @media screen and (min-width: 768px) {
