@@ -1,4 +1,5 @@
 from flask import Flask, render_template, jsonify
+from flask import session as login_session
 import restaurants
 import restaurant_new
 import restaurant_edit
@@ -8,6 +9,9 @@ import menu_new
 import menu_edit
 import menu_delete
 import database_interaction
+import random
+import string
+import google_connect
 
 app = Flask(__name__)
 
@@ -20,6 +24,7 @@ new_menu_page = menu_new.Menu_new()
 edit_menu_page = menu_edit.Menu_edit()
 delete_menu_page = menu_delete.Menu_delete()
 db_rest = database_interaction.DB_interaction()
+g_connect = google_connect.Google_connect()
 
 @app.route('/')
 @app.route('/restaurants/')
@@ -76,11 +81,15 @@ def menu_JSON(rest_id, menu_id):
 
 @app.route('/login/')
 def login_show():
-    return 'login page'
+    state = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in xrange(32))
+    login_session['state'] = state
+    return render_template('login.html', STATE=state)
 
-@app.route('/gconnect/', methods=['POST'])
+@app.route('/gconnect', methods=['POST'])
 def gconnect():
-    return 'connected width google'
+    print"#############"
+    print "$$$$$$$$$$$"
+    return g_connect.launch()
 
 @app.route('/fbconnect/', methods=['POST'])
 def fbconnect():

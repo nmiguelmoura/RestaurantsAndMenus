@@ -87,12 +87,6 @@ class DB_interaction:
     def update_menu(self, menu_id, new_name, new_course, new_description, new_price):
         menu = self.query_menu_by_id(menu_id)
 
-        print "############"
-        print menu
-        print menu_id
-        print new_name
-        print "############"
-
         if menu:
             try:
                 menu.name = new_name
@@ -115,4 +109,24 @@ class DB_interaction:
             except:
                 print u"An unknown error has occurred. Please try again."
 
+    def get_user_info(self, user_id):
+        user = self.session.query(User).filter_by(id=user_id).one()
+        return user
 
+    def get_user_id(self, email):
+        try:
+            user = self.session.query(User).filter_by(email=email).one()
+            return user.id
+        except:
+            return None
+
+    def create_user(self, login_session):
+        existing_user = self.get_user_id(login_session['email'])
+        if existing_user:
+            print u'Current user already registered!'
+            return existing_user
+
+        new_user = User(name=login_session['username'], email=login_session['email'], picture=login_session['picture'])
+        self.session.add(new_user)
+        self.session.commit()
+        return self.get_user_id(login_session['email'])
