@@ -1,9 +1,8 @@
-from flask import render_template, request, flash
+from flask import render_template, request, flash, make_response
 from flask import session as login_session
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
 from oauth2client.client import AccessTokenCredentials
-from flask import make_response
 import httplib2
 import requests
 import json
@@ -73,11 +72,9 @@ class Google_connect():
             response.headers['Content-Type'] = 'application/json'
             return response
 
-        # Store the access token in the session for later use.
-        login_session['access_token'] = credentials.access_token
-
         # store only the access_token
         login_session['credentials'] = credentials.access_token
+
         # return credential object
         credentials = AccessTokenCredentials(login_session['credentials'], 'user-agent-value')
 
@@ -104,5 +101,5 @@ class Google_connect():
         output += '<img src="'
         output += login_session['picture']
         output += ' " style = "width: 300px; height: 300px;border-radius: 150px;-webkit-border-radius: 150px;-moz-border-radius: 150px;"> '
-        flash("you are now logged in as %s" % login_session['username'])
+        flash("You are now logged in as %s" % login_session['username'])
         return output
