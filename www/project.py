@@ -22,57 +22,73 @@ delete_menu_page = menu_delete.Menu_delete()
 db_rest = database_interaction.DB_interaction()
 
 @app.route('/')
-@app.route('/restaurants')
+@app.route('/restaurants/')
 def show_restaurants():
     return restaurants_page.launch()
 
 
-@app.route('/restaurants/new', methods=['GET', 'POST'])
+@app.route('/restaurants/new/', methods=['GET', 'POST'])
 def add_restaurant():
     return new_restaurant_page.launch()
 
-@app.route('/restaurants/<int:rest_id>/edit', methods=['GET', 'POST'])
+@app.route('/restaurants/<int:rest_id>/edit/', methods=['GET', 'POST'])
 def edit_restaurant(rest_id):
     return edit_restaurant_page.launch(rest_id)
 
-@app.route('/restaurants/<int:rest_id>/delete', methods=['GET', 'POST'])
+@app.route('/restaurants/<int:rest_id>/delete/', methods=['GET', 'POST'])
 def delete_restaurant(rest_id):
     return delete_restaurant_page.launch(rest_id)
 
-@app.route('/restaurants/<int:rest_id>/menu')
+@app.route('/restaurants/<int:rest_id>/menu/')
 def show_menus(rest_id):
     return menus_page.launch(rest_id)
 
-@app.route('/restaurants/<int:rest_id>/menu/new', methods=['GET', 'POST'])
+@app.route('/restaurants/<int:rest_id>/menu/new/', methods=['GET', 'POST'])
 def add_menu(rest_id):
     return new_menu_page.launch(rest_id)
 
-@app.route('/restaurants/<int:rest_id>/menu/<int:menu_id>/edit', methods=['GET', 'POST'])
+@app.route('/restaurants/<int:rest_id>/menu/<int:menu_id>/edit/', methods=['GET', 'POST'])
 def edit_menu(rest_id, menu_id):
     return edit_menu_page.launch(rest_id, menu_id)
 
-@app.route('/restaurants/<int:rest_id>/menu/<int:menu_id>/delete', methods=['GET', 'POST'])
+@app.route('/restaurants/<int:rest_id>/menu/<int:menu_id>/delete/', methods=['GET', 'POST'])
 def delete_menu(rest_id, menu_id):
     return delete_menu_page.launch(rest_id, menu_id)
 
-@app.route('/pagenotfound')
+@app.route('/pagenotfound/')
 def page_not_found():
     return render_template('pagenotfound.html')
 
-@app.route('/restaurants/JSON')
+@app.route('/restaurants/JSON/')
 def restaurant_JSON():
     restaurants, num = db_rest.query_restaurants()
     return jsonify(Restaurants=[r.serialize for r in restaurants])
 
-@app.route('/restaurants/<int:rest_id>/menu/JSON')
+@app.route('/restaurants/<int:rest_id>/menu/JSON/')
 def restaurant_menu_JSON(rest_id):
     menus = db_rest.query_menus(rest_id)
     return jsonify(Menus=[m.serialize for m in menus])
 
-@app.route('/restaurants/<int:rest_id>/menu/<int:menu_id>/JSON')
+@app.route('/restaurants/<int:rest_id>/menu/<int:menu_id>/JSON/')
 def menu_JSON(rest_id, menu_id):
     menu = db_rest.query_menu_by_id(menu_id)
     return jsonify(Menu=[menu.serialize])
+
+@app.route('/login/')
+def login_show():
+    return 'login page'
+
+@app.route('/gconnect/', methods=['POST'])
+def gconnect():
+    return 'connected width google'
+
+@app.route('/fbconnect/', methods=['POST'])
+def fbconnect():
+    return 'connected width facebook'
+
+@app.route('/disconnect/')
+def disconnect():
+    return 'disconnected'
 
 
 if __name__ == '__main__':
