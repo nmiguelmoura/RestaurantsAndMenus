@@ -1,25 +1,25 @@
 from flask import Flask, render_template, jsonify
-import restaurantspage
-import newrestaurantpage
-import editrestaurantpage
-import deleterestaurantpage
-import menuspage
-import newmenupage
-import editmenupage
-import deletemenupage
-import db_interaction
+import restaurants
+import restaurant_new
+import restaurant_edit
+import restaurant_delete
+import menus
+import menu_new
+import menu_edit
+import menu_delete
+import database_interaction
 
 app = Flask(__name__)
 
-restaurants_page = restaurantspage.Restaurants_Page()
-new_restaurant_page = newrestaurantpage.New_Restaurant_Page()
-edit_restaurant_page = editrestaurantpage.Edit_Restaurant_Page()
-delete_restaurant_page = deleterestaurantpage.Delete_Restaurant_Page()
-menus_page = menuspage.Menus_Page()
-new_menu_page = newmenupage.New_Menu_page()
-edit_menu_page = editmenupage.Edit_Menu_Page()
-delete_menu_page = deletemenupage.Delete_Menu_Page()
-db_rest = db_interaction.DB_interaction()
+restaurants_page = restaurants.Restaurants()
+new_restaurant_page = restaurant_new.Restaurant_new()
+edit_restaurant_page = restaurant_edit.Restaurant_edit()
+delete_restaurant_page = restaurant_delete.Restaurant_delete()
+menus_page = menus.Menus()
+new_menu_page = menu_new.Menu_new()
+edit_menu_page = menu_edit.Menu_edit()
+delete_menu_page = menu_delete.Menu_delete()
+db_rest = database_interaction.DB_interaction()
 
 @app.route('/')
 @app.route('/restaurants')

@@ -1,6 +1,6 @@
 import re
 
-class Validate_Form_Input:
+class Validate_form_input:
     def __init__(self):
         pass
 

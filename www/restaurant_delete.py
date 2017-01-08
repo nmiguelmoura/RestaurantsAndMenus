@@ -1,9 +1,9 @@
 from flask import render_template, request, redirect, flash
-import db_interaction
+import database_interaction
 
-class Delete_Restaurant_Page:
+class Restaurant_delete:
 
-    db_rest = db_interaction.DB_interaction()
+    db_rest = database_interaction.DB_interaction()
 
     def __init__(self):
         pass

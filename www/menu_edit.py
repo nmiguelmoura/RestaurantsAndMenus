@@ -1,11 +1,13 @@
 from flask import render_template, request, redirect, flash, url_for
-import db_interaction
-import validateforminput
 
-class Edit_Menu_Page:
+import database_interaction
+import prefabs.validate_form_input
 
-    db_rest = db_interaction.DB_interaction()
-    val = validateforminput.Validate_Form_Input()
+
+class Menu_edit:
+
+    db_rest = database_interaction.DB_interaction()
+    val = prefabs.validate_form_input.Validate_form_input()
 
     def __init__(self):
         pass

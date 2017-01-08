@@ -1,10 +1,10 @@
 from flask import render_template
 
-import db_interaction
+import database_interaction
 
-class Restaurants_Page:
+class Restaurants:
 
-    db_rest = db_interaction.DB_interaction()
+    db_rest = database_interaction.DB_interaction()
 
     def __init__(self):
         pass

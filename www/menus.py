@@ -1,9 +1,9 @@
 from flask import render_template, redirect, flash
-import db_interaction
+import database_interaction
 
-class Menus_Page:
+class Menus:
 
-    db_rest = db_interaction.DB_interaction()
+    db_rest = database_interaction.DB_interaction()
 
     def __init__(self):
         pass
