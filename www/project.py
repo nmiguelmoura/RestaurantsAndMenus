@@ -12,6 +12,7 @@ import database_interaction
 import random
 import string
 import google_connect
+import facebook_connect
 import disconnect
 
 app = Flask(__name__)
@@ -26,6 +27,7 @@ edit_menu_page = menu_edit.Menu_edit()
 delete_menu_page = menu_delete.Menu_delete()
 db_rest = database_interaction.DB_interaction()
 g_connect = google_connect.Google_connect()
+fb_connect = facebook_connect.Facebook_connect()
 g_fb_disconnect_page = disconnect.Disconnect()
 
 @app.route('/')
@@ -91,9 +93,9 @@ def login_show():
 def gconnect():
     return g_connect.launch()
 
-@app.route('/fbconnect/', methods=['POST'])
+@app.route('/fbconnect', methods=['POST'])
 def fbconnect():
-    return 'connected width facebook'
+    return fb_connect.launch()
 
 @app.route('/disconnect/')
 def disconnect_page():
