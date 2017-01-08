@@ -2,7 +2,7 @@
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from database_setup import Base, Restaurant, Menu
+from database_setup import Base, Restaurant, Menu, User
 
 class DB_interaction:
     engine = create_engine('sqlite:///restaurant.db')
