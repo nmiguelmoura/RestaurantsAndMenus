@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from flask import session as login_session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, Restaurant, Menu, User
@@ -23,7 +23,7 @@ class DB_interaction:
 
     def add_restaurant(self, name):
         try:
-            new_restaurant = Restaurant(name=name)
+            new_restaurant = Restaurant(name=name, user_id=login_session['user_id'])
             self.session.add(new_restaurant)
             self.session.commit()
         except:
@@ -70,7 +70,7 @@ class DB_interaction:
 
     def add_menu(self, name, course, description, price, rest_id):
         try:
-            new_menu = Menu(name=name, course=course, description=description, price=price, restaurant_id=rest_id)
+            new_menu = Menu(name=name, course=course, description=description, price=price, restaurant_id=rest_id, user_id=login_session['user_id'])
             self.session.add(new_menu)
             self.session.commit()
         except:

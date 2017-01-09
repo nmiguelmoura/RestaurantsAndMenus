@@ -23,6 +23,7 @@
                         <p class="menu-params"><span class="strong-text">Description</span><br>{{ menu.description }}</p>
                         <p class="menu-params"><span class="strong-text">Price</span><br>{{ menu.price }} €</p>
                     </div>
+                    {% if session["user_id"] == restaurant.user_id %}
                     <div class="wrapper-inside menu-btns">
                         <div class="padded-col-sm-6-12">
                             <a class="button-type-0"
@@ -35,11 +36,14 @@
                             </a>
                         </div>
                     </div>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>
     {% endif %}
+    {% if session["user_id"] == restaurant.user_id %}
     <div class="col-sm-12-12 content-white-background button-container-big">
         <a class="button-type-1" href="{{ url_for('add_menu', rest_id=restaurant.id) }}"><p>Add new menu</p></a>
     </div>
+    {% endif %}
 {% endblock %}

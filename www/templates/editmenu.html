@@ -4,6 +4,7 @@
     <h2 class="col-sm-12-12 content-white-background">Edit menu {{ menu.name }}</h2>
     <form method="post" action="{{ url_for('edit_menu', rest_id=rest_id, menu_id=menu.id) }}"
           class="wrapper-inside content-white-background">
+        <input type="hidden" name="CSRF" value="{{ session['CSRF'] }}">
         <div class="col-sm-12-12 form-component">
             <p>Name</p>
             <input type="text" name="menu_name" value="{{ name }}" placeholder="Insert menu name">

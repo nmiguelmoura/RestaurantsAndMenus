@@ -113,5 +113,23 @@ input[type="submit"] {
     }
 }
 
+.page-not-found {
+    padding: 5px;
+}
 
 
+/*--LOGIN----------------*/
+.provider-login:first-child {
+    margin-top: 20px;
+}
+
+.provider-login:nth-child(2) {
+    margin: 10px 0 20px 0;
+}
+
+/*-Google button--*/
+#signInButton,
+#fbSignInButton {
+    margin: 0 auto;
+    width: 154px;
+}

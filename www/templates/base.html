@@ -19,7 +19,7 @@
     <header>
         <div class="wrapper header-content">
             <h1 class="col-sm-8-12 col-md-10-12"><a href="{{ url_for('show_restaurants') }}">Restaurant search</a></h1>
-                <div class="col-sm-4-12 col-md-2-12 button-container-small">
+                <div id="login-button" class="col-sm-4-12 col-md-2-12 button-container-small">
                     {% if 'username' not in session %}
                     <a class="button-type-2" href="{{ url_for('login_show') }}">
                         <p>Login</p>

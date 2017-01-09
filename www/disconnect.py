@@ -46,6 +46,7 @@ class Disconnect():
                 self.fb_disconnect()
                 del login_session['facebook_id']
 
+            del login_session['user_id']
             del login_session['username']
             del login_session['email']
             del login_session['picture']

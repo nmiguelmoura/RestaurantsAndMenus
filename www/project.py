@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, redirect, url_for, flash
 from flask import session as login_session
 import restaurants
 import restaurant_new
@@ -38,14 +38,29 @@ def show_restaurants():
 
 @app.route('/restaurants/new/', methods=['GET', 'POST'])
 def add_restaurant():
+    user_id = login_session.get('user_id')
+
+    if user_id is None:
+        return redirect(url_for('login_show'))
+
     return new_restaurant_page.launch()
 
 @app.route('/restaurants/<int:rest_id>/edit/', methods=['GET', 'POST'])
 def edit_restaurant(rest_id):
+    user_id = login_session.get('user_id')
+
+    if user_id is None:
+        return redirect(url_for('login_show'))
+
     return edit_restaurant_page.launch(rest_id)
 
 @app.route('/restaurants/<int:rest_id>/delete/', methods=['GET', 'POST'])
 def delete_restaurant(rest_id):
+    user_id = login_session.get('user_id')
+
+    if user_id is None:
+        return redirect(url_for('login_show'))
+
     return delete_restaurant_page.launch(rest_id)
 
 @app.route('/restaurants/<int:rest_id>/menu/')
@@ -54,14 +69,29 @@ def show_menus(rest_id):
 
 @app.route('/restaurants/<int:rest_id>/menu/new/', methods=['GET', 'POST'])
 def add_menu(rest_id):
+    user_id = login_session.get('user_id')
+
+    if user_id is None:
+        return redirect(url_for('login_show'))
+
     return new_menu_page.launch(rest_id)
 
 @app.route('/restaurants/<int:rest_id>/menu/<int:menu_id>/edit/', methods=['GET', 'POST'])
 def edit_menu(rest_id, menu_id):
+    user_id = login_session.get('user_id')
+
+    if user_id is None:
+        return redirect(url_for('login_show'))
+
     return edit_menu_page.launch(rest_id, menu_id)
 
 @app.route('/restaurants/<int:rest_id>/menu/<int:menu_id>/delete/', methods=['GET', 'POST'])
 def delete_menu(rest_id, menu_id):
+    user_id = login_session.get('user_id')
+
+    if user_id is None:
+        return redirect(url_for('login_show'))
+
     return delete_menu_page.launch(rest_id, menu_id)
 
 @app.route('/pagenotfound/')
@@ -85,6 +115,12 @@ def menu_JSON(rest_id, menu_id):
 
 @app.route('/login/')
 def login_show():
+    user_id = login_session.get('user_id')
+
+    if user_id:
+        flash('You are already logged in')
+        return redirect(url_for('show_restaurants'))
+
     state = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in xrange(32))
     login_session['state'] = state
     return render_template('login.html', STATE=state)

@@ -3,6 +3,7 @@
 {% block content %}
     <h2 class="col-sm-12-12 content-white-background">Delete menu {{ menu.name }}</h2>
     <form method="post" action="{{ url_for('delete_menu', rest_id=rest_id, menu_id=menu.id) }}" class="wrapper content-white-background">
+        <input type="hidden" name="CSRF" value="{{ session['CSRF'] }}">
         <input type="submit" value="Delete">
     </form>
     <div class="col-sm-12-12 content-white-background button-container-big">

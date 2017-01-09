@@ -1,12 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% with messages = get_flashed_messages() %}
+    <h2 class="col-sm-12-12 content-white-background">Page not found</h2>
+    <div class="wrapper content-white-background page-not-found">
+        {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for m in messages %}
                 <p>{{ m }}</p>
             {% endfor %}
         {% endif %}
     {% endwith %}
-    <a href="{{ url_for('show_restaurants') }}"><p>Restaurants</p></a>
+    </div>
+    <div class="col-sm-12-12 content-white-background button-container-big">
+        <a class="button-type-1" href="{{ url_for('show_restaurants') }}"><p>Show Restaurants</p></a>
+    </div>
 {% endblock %}
