@@ -15,7 +15,9 @@ import google_connect
 import facebook_connect
 import disconnect
 
+UPLOAD_FOLDER = 'static/uploads'
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 restaurants_page = restaurants.Restaurants()
 new_restaurant_page = restaurant_new.Restaurant_new()
@@ -74,7 +76,7 @@ def add_menu(rest_id):
     if user_id is None:
         return redirect(url_for('login_show'))
 
-    return new_menu_page.launch(rest_id)
+    return new_menu_page.launch(rest_id, app)
 
 @app.route('/restaurants/<int:rest_id>/menu/<int:menu_id>/edit/', methods=['GET', 'POST'])
 def edit_menu(rest_id, menu_id):
@@ -83,7 +85,7 @@ def edit_menu(rest_id, menu_id):
     if user_id is None:
         return redirect(url_for('login_show'))
 
-    return edit_menu_page.launch(rest_id, menu_id)
+    return edit_menu_page.launch(rest_id, menu_id, app)
 
 @app.route('/restaurants/<int:rest_id>/menu/<int:menu_id>/delete/', methods=['GET', 'POST'])
 def delete_menu(rest_id, menu_id):

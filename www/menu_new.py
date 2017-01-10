@@ -1,9 +1,13 @@
-from flask import render_template, request, redirect, flash, url_for
+from flask import Flask, render_template, request, redirect, flash, url_for
 from flask import session as login_session
+
+import os
+from werkzeug.utils import secure_filename
 
 import database_interaction
 import prefabs.validate_form_input
 import prefabs.CSRF_state_generator
+import prefabs.file_extension_check
 
 
 class Menu_new:
@@ -11,12 +15,12 @@ class Menu_new:
     db_rest = database_interaction.DB_interaction()
     val = prefabs.validate_form_input.Validate_form_input()
     csrf = prefabs.CSRF_state_generator.CSRF_state_generator()
+    extension_check = prefabs.file_extension_check.File_extension_check()
 
     def __init__(self):
         pass
 
-
-    def launch(self, rest_id):
+    def launch(self, rest_id, app):
         if 'CSRF' not in login_session:
             login_session['CSRF'] = self.csrf.generate()
 
@@ -45,7 +49,15 @@ class Menu_new:
                     if val_name["response"] and val_course["response"] and val_description["response"] and val_price[
                         "response"]:
                         flash(u"%s menu was added to %s." % (name, restaurant.name))
-                        self.db_rest.add_menu(name, course, description, val_price["response"], rest_id)
+                        menu = self.db_rest.add_menu(name, course, description, val_price["response"], rest_id)
+
+                        file = request.files.get('file')
+                        if file and self.extension_check.check(file.filename):
+                            ext = self.extension_check.get_extension(file.filename)
+                            file.filename = 'image_menu_%s.%s' % (menu, ext)
+                            filename = secure_filename(file.filename)
+                            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
                         return redirect(url_for("show_menus", rest_id=rest_id))
                     else:
                         return render_template("newmenu.html", restaurant=restaurant, name=name,

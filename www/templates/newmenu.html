@@ -2,7 +2,7 @@
 
 {% block content %}
     <h2 class="col-sm-12-12 content-white-background">Add a new menu to {{ restaurant.name }}'s restaurant</h2>
-    <form method="post" action="{{ url_for('add_menu', rest_id=restaurant.id) }}"
+    <form method="post" action="{{ url_for('add_menu', rest_id=restaurant.id) }}" enctype="multipart/form-data"
           class="wrapper content-white-background">
         <input type="hidden" name="CSRF" value="{{ session['CSRF'] }}">
         <div class="col-sm-12-12 form-component">
@@ -35,6 +35,10 @@
             <input type="number" step="0.01" name="menu_price" placeholder="Insert menu price in Euros (€)"
                    value="{{ price }}">
             <p class="error-message">{{ price_message }}</p>
+        </div>
+        <div class="input-file">
+            <button class="send-picture-button">Select Menu Picture</button>
+            <input type="file" name="file">
         </div>
         <input type="submit" value="Submit">
     </form>

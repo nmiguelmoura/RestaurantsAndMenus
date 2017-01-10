@@ -73,6 +73,7 @@ class DB_interaction:
             new_menu = Menu(name=name, course=course, description=description, price=price, restaurant_id=rest_id, user_id=login_session['user_id'])
             self.session.add(new_menu)
             self.session.commit()
+            return new_menu.id
         except:
             print u"An unknown error has occurred. Please try again."
 
@@ -95,6 +96,7 @@ class DB_interaction:
                 menu.price = new_price
                 self.session.add(menu)
                 self.session.commit()
+                return menu.id
             except:
                 print u"An unknown error has occurred. Please try again."
 

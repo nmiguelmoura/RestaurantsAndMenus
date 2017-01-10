@@ -1,20 +1,25 @@
 from flask import render_template, request, redirect, flash, url_for
 from flask import session as login_session
 
+import os
+from werkzeug.utils import secure_filename
+
 import database_interaction
 import prefabs.validate_form_input
 import prefabs.CSRF_state_generator
+import prefabs.file_extension_check
 
 
 class Menu_edit:
     db_rest = database_interaction.DB_interaction()
     val = prefabs.validate_form_input.Validate_form_input()
     csrf = prefabs.CSRF_state_generator.CSRF_state_generator()
+    extension_check = prefabs.file_extension_check.File_extension_check()
 
     def __init__(self):
         pass
 
-    def launch(self, rest_id, menu_id):
+    def launch(self, rest_id, menu_id, app):
         if 'CSRF' not in login_session:
             login_session['CSRF'] = self.csrf.generate()
 
@@ -41,15 +46,23 @@ class Menu_edit:
                     val_description = self.val.validate_string(description, 250)
                     val_price = self.val.validate_price(price)
 
-                    print val_name["response"]
-                    print val_course["response"]
-                    print val_description["response"]
-                    print val_price["response"]
-
                     if val_name["response"] and val_course["response"] and val_description["response"] and val_price[
                         "response"]:
                         flash(u"%s menu was edited" % name)
-                        self.db_rest.update_menu(menu_id, name, course, description, val_price["response"])
+                        menu = self.db_rest.update_menu(menu_id, name, course, description, val_price["response"])
+
+                        file = request.files.get('file')
+                        print "333333333"
+                        print file
+                        if file and self.extension_check.check(file.filename):
+                            ext = self.extension_check.get_extension(file.filename)
+                            print file.filename
+                            print ext
+                            print app.config['UPLOAD_FOLDER']
+                            file.filename = 'image_menu_%s.%s' % (menu, ext)
+                            filename = secure_filename(file.filename)
+                            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
                         return redirect(url_for("show_menus", rest_id=rest_id))
                     else:
                         return render_template("editmenu.html", rest_id=rest_id, menu=menu, name=name,
