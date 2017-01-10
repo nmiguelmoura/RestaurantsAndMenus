@@ -36,6 +36,13 @@
     padding: 5px 0;
 }
 
+.menu-picture {
+    margin-top: 10px;
+    padding: 0 5px;
+    width: 100%;
+    max-height: 200px;
+}
+
 .restaurant-creator .creator-name {
     width: calc(100% - 41px);
 }
@@ -64,6 +71,10 @@
 
     .menu-btns {
         height: 55px;
+    }
+
+    .menu-picture {
+        max-height: 400px;
     }
 }
 

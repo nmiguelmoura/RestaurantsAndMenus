@@ -23,6 +23,11 @@
                         <p class="menu-params"><span class="strong-text">Description</span><br>{{ menu.description }}</p>
                         <p class="menu-params"><span class="strong-text">Price</span><br>{{ menu.price }} €</p>
                     </div>
+                    {% if 'm_%s' % menu.id in menu_pictures %}
+                    <div class="col-sm-12-12">
+                        <img class="menu-picture" src="{{ url_for('static', filename='%s' % menu_pictures['m_%s' % menu.id]) }}">
+                    </div>
+                    {% endif %}
                     {% if session["user_id"] == restaurant.user_id %}
                     <div class="wrapper-inside menu-btns">
                         <div class="padded-col-sm-6-12">
