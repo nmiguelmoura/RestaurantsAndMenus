@@ -179,6 +179,11 @@ input[type="file"] {
     margin: 10px 0 20px 0;
 }
 
+.provider-login button {
+    border: none;
+    background-color: transparent;
+}
+
 #result h1 {
     width: 100%;
     font-size: 1.4em;
