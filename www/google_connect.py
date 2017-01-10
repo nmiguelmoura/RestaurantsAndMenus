@@ -7,10 +7,12 @@ import httplib2
 import requests
 import json
 import database_interaction
+import prefabs.login_output
 
 class Google_connect():
 
     db_rest = database_interaction.DB_interaction()
+    output = prefabs.login_output.Login_output()
     CLIENT_ID = json.loads(open('g_client_secrets.json', 'r').read())['web']['client_id']
 
     def __init__(self):
@@ -94,12 +96,5 @@ class Google_connect():
 
         login_session['user_id'] = self.db_rest.create_user(login_session)
 
-        output = ''
-        output += '<h1>Welcome, '
-        output += login_session['username']
-        output += '!</h1>'
-        output += '<img src="'
-        output += login_session['picture']
-        output += ' " style = "width: 300px; height: 300px;border-radius: 150px;-webkit-border-radius: 150px;-moz-border-radius: 150px;"> '
         flash("You are now logged in as %s" % login_session['username'])
-        return output
+        return self.output.get_output()

@@ -3,11 +3,13 @@ from flask import session as login_session
 import httplib2
 import json
 import database_interaction
+import prefabs.login_output
 
 
 class Facebook_connect():
 
     db_rest = database_interaction.DB_interaction()
+    output = prefabs.login_output.Login_output()
 
     def __init(self):
         pass
@@ -66,14 +68,5 @@ class Facebook_connect():
             user_id = self.db_rest.create_user(login_session)
         login_session['user_id'] = user_id
 
-        output = ''
-        output += '<h1>Welcome, '
-        output += login_session['username']
-
-        output += '!</h1>'
-        output += '<img src="'
-        output += login_session['picture']
-        output += ' " style = "width: 300px; height: 300px;border-radius: 150px;-webkit-border-radius: 150px;-moz-border-radius: 150px;"> '
-
         flash("Now logged in as %s" % login_session['username'])
-        return output
+        return self.output.get_output()

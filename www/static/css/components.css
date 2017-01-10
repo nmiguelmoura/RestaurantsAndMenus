@@ -127,6 +127,28 @@ input[type="submit"] {
     margin: 10px 0 20px 0;
 }
 
+#result h1 {
+    width: 100%;
+    font-size: 1.4em;
+    text-align: center;
+    padding-top: 20px;
+}
+
+#result img {
+    width: 250px;
+    height: 250px;
+    display: block;
+    margin: 20px auto;
+    border-radius: 250px;
+}
+
+#result p {
+    width: 100%;
+    font-size: 0.875em;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 /*-Google button--*/
 #signInButton,
 #fbSignInButton {

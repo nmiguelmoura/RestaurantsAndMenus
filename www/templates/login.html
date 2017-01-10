@@ -30,7 +30,7 @@
                 if (authResult['code']) {
                     $('#signInButton').attr('style', 'display: none');
                     $('#fbSignInButton').attr('style', 'display: none');
-
+                    $('.provider-login').attr('style', 'display: none');
                     $.ajax({
                         type: 'POST',
                         url: '/gconnect?state={{ STATE }}',
@@ -39,7 +39,7 @@
                         contentType: 'application/octet-stream; charset=utf-8',
                         success: function (result) {
                             if (result) {
-                                $('#result').html('Login Successful!<br>' + result + '<br>Redirecting...');
+                                $('#result').html(result);
                                 setTimeout(function () {
                                     window.location.href = "/restaurants/";
                                 }, 4000)
@@ -84,6 +84,7 @@
             function sendTokenToServer() {
                 $('#signInButton').attr('style', 'display: none');
                 $('#fbSignInButton').attr('style', 'display: none');
+                $('.provider-login').attr('style', 'display: none');
 
                 var access_token = FB.getAuthResponse()['accessToken'];
                 console.log(access_token);
@@ -99,7 +100,7 @@
                         success: function (result) {
                             // Handle or verify the server response if necessary.
                             if (result) {
-                                $('#result').html('Login Successful!</br>' + result + '</br>Redirecting...');
+                                $('#result').html(result);
                                 setTimeout(function () {
                                     window.location.href = "/restaurants/";
                                 }, 4000);
@@ -108,6 +109,7 @@
                                 $('#result').html('Failed to make a server-side call. Check your configuration and console.');
                                 $('#signInButton').attr('style', 'display: display');
                                 $('#fbSignInButton').attr('style', 'display: display');
+                                $('.provider-login').attr('style', 'display: display');
                             }
                         }
 
@@ -127,7 +129,7 @@
         <!-- END FACEBOOK SIGN IN BUTTON -->
         </div>
 
-        <div id="result">
+        <div id="result" class="wrapper-inside">
 
         </div>
 
