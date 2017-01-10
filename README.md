@@ -1,6 +1,6 @@
 # Restaurant Menu Flask App
 
-This app was built as aflask exercise, and allows any visitor to get a list of restaurants and respective menus.
+This app was built as a flask exercise and allows any visitor to get a list of restaurants and respective menus.
 Logged users can create, edit and delete restaurants and menus.
 The login system uses third-party provides: Google and Facebook.
 

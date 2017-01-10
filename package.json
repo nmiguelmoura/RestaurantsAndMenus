@@ -1,0 +1,23 @@
+{
+  "name": "restaurants",
+  "version": "1.0.0",
+  "description": "This app was built as aflask exercise, and allows any visitor to get a list of restaurants and respective menus. Logged users can create, edit and delete restaurants and menus. The login system uses third-party provides: Google and Facebook.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nmiguelmoura/RestaurantsAndMenus.git"
+  },
+  "author": "Nuno Machado",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nmiguelmoura/RestaurantsAndMenus/issues"
+  },
+  "homepage": "https://github.com/nmiguelmoura/RestaurantsAndMenus#readme",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-cssmin": "^1.0.2"
+  }
+}
