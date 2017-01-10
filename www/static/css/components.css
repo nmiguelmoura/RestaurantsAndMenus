@@ -36,6 +36,26 @@
     padding: 5px 0;
 }
 
+.restaurant-creator .creator-name {
+    width: calc(100% - 41px);
+}
+
+.restaurant-creator .creator-name p{
+    font-size: 0.75em;
+    margin: 4px 5px;
+}
+
+.restaurant-creator .creator-name .label {
+    font-weight: 700;
+}
+
+.restaurant-creator img {
+    width: 36px;
+    height: 36px;
+    border-radius: 36px;
+    margin-top: 5px;
+}
+
 @media screen and (min-width: 768px) {
     .menu-params {
         padding: 10px 5px;

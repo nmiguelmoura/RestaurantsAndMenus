@@ -45,5 +45,13 @@
     <div class="col-sm-12-12 content-white-background button-container-big">
         <a class="button-type-1" href="{{ url_for('add_menu', rest_id=restaurant.id) }}"><p>Add new menu</p></a>
     </div>
+    {% else %}
+    <div class="col-sm-12-12 content-white-background restaurant-creator wrapper-inside">
+        <div class="creator-name">
+            <p class="label">Created by</p>
+            <p>{{ creator.name }}</p>
+        </div>
+        <img src="{{ creator.picture }}">
+    </div>
     {% endif %}
 {% endblock %}

@@ -14,10 +14,12 @@ class Menus:
 
         if restaurant:
             menus = self.db_rest.query_menus(rest_id)
+            creator = self.db_rest.get_user_info(restaurant.user_id)
+
             if menus:
-                return render_template("menu.html", restaurant=restaurant, menus=menus)
+                return render_template("menu.html", restaurant=restaurant, menus=menus, creator=creator)
             else:
-                return render_template("menu.html", restaurant=restaurant, menus=[], no_menus=True)
+                return render_template("menu.html", restaurant=restaurant, menus=[], creator=creator, no_menus=True)
         else:
             flash("The restaurant you are trying to see does not exist!")
             return redirect("/pagenotfound")
