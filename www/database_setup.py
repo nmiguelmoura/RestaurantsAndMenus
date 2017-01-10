@@ -6,6 +6,7 @@ Base = declarative_base()
 
 
 class User(Base):
+    '''Class that creates table User in DB'''
 
     __tablename__ = 'user'
 
@@ -16,6 +17,7 @@ class User(Base):
 
 
 class Restaurant(Base):
+    '''Class that creates table Restaurant in DB'''
 
     __tablename__ = "restaurant"
 
@@ -33,6 +35,7 @@ class Restaurant(Base):
 
 
 class Menu(Base):
+    '''Class that creates table menu in DB'''
 
     __tablename__ = "menu"
 

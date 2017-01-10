@@ -9,11 +9,13 @@ import json
 import database_interaction
 import prefabs.login_output
 
-class Google_connect():
 
+class Google_connect():
+    '''Class that handles login through google account.'''
     db_rest = database_interaction.DB_interaction()
     output = prefabs.login_output.Login_output()
-    CLIENT_ID = json.loads(open('g_client_secrets.json', 'r').read())['web']['client_id']
+    CLIENT_ID = json.loads(open('g_client_secrets.json', 'r').read())['web'][
+        'client_id']
 
     def __init__(self):
         pass
@@ -21,7 +23,8 @@ class Google_connect():
     def launch(self):
         # Validate state token
         if request.args.get('state') != login_session['state']:
-            response = make_response(json.dumps('Invalid state parameter.'), 401)
+            response = make_response(json.dumps('Invalid state parameter.'),
+                                     401)
             response.headers['Content-Type'] = 'application/json'
             return response
         # Obtain authorization code
@@ -29,7 +32,8 @@ class Google_connect():
 
         try:
             # Upgrade the authorization code into a credentials object
-            oauth_flow = flow_from_clientsecrets('g_client_secrets.json', scope='')
+            oauth_flow = flow_from_clientsecrets('g_client_secrets.json',
+                                                 scope='')
             oauth_flow.redirect_uri = 'postmessage'
             credentials = oauth_flow.step2_exchange(code)
         except FlowExchangeError:
@@ -69,8 +73,9 @@ class Google_connect():
         stored_credentials = login_session.get('credentials')
         stored_gplus_id = login_session.get('gplus_id')
         if stored_credentials is not None and gplus_id == stored_gplus_id:
-            response = make_response(json.dumps('Current user is already connected.'),
-                                     200)
+            response = make_response(
+                json.dumps('Current user is already connected.'),
+                200)
             response.headers['Content-Type'] = 'application/json'
             return response
 
@@ -78,7 +83,8 @@ class Google_connect():
         login_session['credentials'] = credentials.access_token
 
         # return credential object
-        credentials = AccessTokenCredentials(login_session['credentials'], 'user-agent-value')
+        credentials = AccessTokenCredentials(login_session['credentials'],
+                                             'user-agent-value')
 
         login_session['gplus_id'] = gplus_id
 

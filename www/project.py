@@ -15,8 +15,10 @@ import google_connect
 import facebook_connect
 import disconnect
 
-UPLOAD_FOLDER = 'static/uploads'
 app = Flask(__name__)
+
+# Config app to allow image uploads.
+UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 restaurants_page = restaurants.Restaurants()

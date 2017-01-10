@@ -7,6 +7,7 @@ import prefabs.login_output
 
 
 class Facebook_connect():
+    '''Class that handles login through facebook account.'''
 
     db_rest = database_interaction.DB_interaction()
     output = prefabs.login_output.Login_output()
@@ -50,7 +51,9 @@ class Facebook_connect():
         login_session['email'] = data["email"]
         login_session['facebook_id'] = data["id"]
 
-        # The token must be stored in the login_session in order to properly logout, let's strip out the information before the equals sign in our token
+        # The token must be stored in the login_session in order to properly
+        # logout, let's strip out the information before the equals
+        # sign in our token
         stored_token = token.split("=")[1]
         login_session['access_token'] = stored_token
 
