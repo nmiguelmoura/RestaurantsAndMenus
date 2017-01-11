@@ -1,5 +1,6 @@
 from flask import Flask, render_template, jsonify, redirect, url_for, flash
 from flask import session as login_session
+from functools import wraps
 import restaurants
 import restaurant_new
 import restaurant_edit
@@ -34,6 +35,15 @@ g_connect = google_connect.Google_connect()
 fb_connect = facebook_connect.Facebook_connect()
 g_fb_disconnect_page = disconnect.Disconnect()
 
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'user_id' in login_session:
+            return f(*args, **kwargs)
+        else:
+            return redirect('/login')
+    return decorated_function
+
 @app.route('/')
 @app.route('/restaurants/')
 def show_restaurants():
@@ -41,30 +51,18 @@ def show_restaurants():
 
 
 @app.route('/restaurants/new/', methods=['GET', 'POST'])
+@login_required
 def add_restaurant():
-    user_id = login_session.get('user_id')
-
-    if user_id is None:
-        return redirect(url_for('login_show'))
-
     return new_restaurant_page.launch()
 
 @app.route('/restaurants/<int:rest_id>/edit/', methods=['GET', 'POST'])
+@login_required
 def edit_restaurant(rest_id):
-    user_id = login_session.get('user_id')
-
-    if user_id is None:
-        return redirect(url_for('login_show'))
-
     return edit_restaurant_page.launch(rest_id)
 
 @app.route('/restaurants/<int:rest_id>/delete/', methods=['GET', 'POST'])
+@login_required
 def delete_restaurant(rest_id):
-    user_id = login_session.get('user_id')
-
-    if user_id is None:
-        return redirect(url_for('login_show'))
-
     return delete_restaurant_page.launch(rest_id)
 
 @app.route('/restaurants/<int:rest_id>/menu/')
@@ -72,30 +70,18 @@ def show_menus(rest_id):
     return menus_page.launch(rest_id)
 
 @app.route('/restaurants/<int:rest_id>/menu/new/', methods=['GET', 'POST'])
+@login_required
 def add_menu(rest_id):
-    user_id = login_session.get('user_id')
-
-    if user_id is None:
-        return redirect(url_for('login_show'))
-
     return new_menu_page.launch(rest_id, app)
 
 @app.route('/restaurants/<int:rest_id>/menu/<int:menu_id>/edit/', methods=['GET', 'POST'])
+@login_required
 def edit_menu(rest_id, menu_id):
-    user_id = login_session.get('user_id')
-
-    if user_id is None:
-        return redirect(url_for('login_show'))
-
     return edit_menu_page.launch(rest_id, menu_id, app)
 
 @app.route('/restaurants/<int:rest_id>/menu/<int:menu_id>/delete/', methods=['GET', 'POST'])
+@login_required
 def delete_menu(rest_id, menu_id):
-    user_id = login_session.get('user_id')
-
-    if user_id is None:
-        return redirect(url_for('login_show'))
-
     return delete_menu_page.launch(rest_id, menu_id)
 
 @app.route('/pagenotfound/')
