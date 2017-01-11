@@ -13,8 +13,6 @@ This project was built using Python, Flask and sqlalchemy.
 ## Run code
 The project is configured to run in a Virtualbox VM with Ubuntu, using Vagrant. All the necessary tools, like python, flask and sqlalchemy, oauth2client, requests, httplib2, are already installed in the VM.
 
-You need google client secrets and facebook client secrets json to proceed with login system. After you have both jsons, rename them to g_client_secrets.json and fb_client_secrets.json and put them in project folder /www.
-
 To run the code:
 - Install [Virtualbox](https://www.virtualbox.org/);
 

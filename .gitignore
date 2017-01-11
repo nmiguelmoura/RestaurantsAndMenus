@@ -1,7 +1,5 @@
 .idea/
 *.pyc
 www/restaurant.db
-www/g_client_secrets.json
-www/fb_client_secrets.json
 node_modules/
 .vagrant
