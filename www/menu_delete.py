@@ -1,8 +1,10 @@
 from flask import render_template, request, redirect, flash, url_for
 from flask import session as login_session
+import os
 
 import database_interaction
 import prefabs.CSRF_state_generator
+import prefabs.file_extension_check
 
 
 class Menu_delete:
@@ -10,6 +12,7 @@ class Menu_delete:
 
     db_rest = database_interaction.DB_interaction()
     csrf = prefabs.CSRF_state_generator.CSRF_state_generator()
+    extension_check = prefabs.file_extension_check.File_extension_check()
 
     def __init__(self):
         pass
@@ -35,6 +38,20 @@ class Menu_delete:
                     if self.csrf.validate():
                         # If CSRF code is valid, generate flash message...
                         flash(u"%s menu was deleted." % menu.name)
+
+                        extensions = self.extension_check.get_available_extensios()
+                        path = ''
+                        for ext in extensions:
+                            # For each available extension, check generate
+                            # a path based on menu id.
+                            path = 'static/uploads/image_menu_%s.%s' % (
+                                menu_id, ext)
+
+                            if os.path.isfile(path):
+                                # If a file exists in generated path,
+                                # delete it.
+                                os.remove(path)
+                                break
 
                         # ... and perform deletion.
                         self.db_rest.delete_menu(menu_id)
