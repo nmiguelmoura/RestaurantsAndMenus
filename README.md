@@ -32,8 +32,11 @@ To run the code:
 - Navigate to folder www:
 `$ cd /www`
 
+- Configure database:
+`$ python database_setup.py`
+
 - Run the file project.py:
-`$ python tournament_test.py`
+`$ python project.py`
 
 - Test in your browser in port 5000:
 `localhost:5000/`
